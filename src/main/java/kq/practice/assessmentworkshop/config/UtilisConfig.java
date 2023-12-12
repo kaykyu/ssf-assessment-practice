@@ -8,7 +8,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -116,10 +120,23 @@ public class UtilisConfig {
 
         RestTemplate template = new RestTemplate();
 
+
+        // String url = UriComponentsBuilder.fromUriString(countryURL)
+        //         .queryParam("code", code)
+        //         .toUriString();
+
+        // RequestEntity<Void> req = RequestEntity.get(url).build();
+
+        // ResponseEntity<String> resp = template.exchange(req, String.class);
+        // String payload = resp.getBody();
+
         String url = countryURL + code;
         String result = template.getForObject(url, String.class);
         JsonReader jReader = Json.createReader(new StringReader(result));
         JsonArray jArray = jReader.readArray();
+
+        // String return = jArray.stream().map(j -> j.asJsonObject()).map(o -> o.get("name").getString("common"));
+
         JsonObject jObject = jArray.getJsonObject(0).get("name").asJsonObject();
 
         return jObject.getString("common");
