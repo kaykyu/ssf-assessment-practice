@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +24,9 @@ public class SearchService {
     @Autowired
     SearchRepo repo;
 
+    @Value("${newsapi.key}")
+    public String apiKey;
+
     RestTemplate template = new RestTemplate();
 
     public String[] getNews(Request request) {
@@ -34,7 +38,7 @@ public class SearchService {
         }
 
         String url = "%scountry=%s&category=%s&apiKey=%s".formatted(UtilisConfig.newsURL, request.getCode(),
-                request.getCategory(), UtilisConfig.apiKey);
+                request.getCategory(), apiKey);
 
         String result = template.getForObject(url, String.class);
         repo.save(request, result);

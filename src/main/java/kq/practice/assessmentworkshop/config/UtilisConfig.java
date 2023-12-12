@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.http.RequestEntity;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
+// import org.springframework.web.util.UriBuilder;
+// import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -21,8 +21,6 @@ import jakarta.json.JsonReader;
 
 @Configuration
 public class UtilisConfig {
-
-    public static String apiKey = "1b64454e63364be681134eeb68ed71aa";
 
     public static String newsURL = "https://newsapi.org/v2/top-headlines?";
     public static String countryURL = "https://restcountries.com/v3.1/alpha/";
@@ -119,7 +117,6 @@ public class UtilisConfig {
     public static String getCountry(String code) {
 
         RestTemplate template = new RestTemplate();
-
 
         // String url = UriComponentsBuilder.fromUriString(countryURL)
         //         .queryParam("code", code)
